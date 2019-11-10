@@ -4,7 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Kismet/GameplayStatics.h"
 #include "Assignment_1Projectile.generated.h"
+
+class UParticleSystem;
 
 UCLASS(config=Game)
 class AAssignment_1Projectile : public AActor
@@ -18,6 +21,12 @@ class AAssignment_1Projectile : public AActor
 	/** Projectile movement component */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
 	class UProjectileMovementComponent* ProjectileMovement;
+
+	UPROPERTY(EditDefaultsOnly, Category = "FX")
+	UParticleSystem* ExplosionEffect;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Hit Sound")
+		USoundBase* HitSound;
 
 public:
 	AAssignment_1Projectile();

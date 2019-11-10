@@ -38,6 +38,9 @@ void AAssignment_1Projectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherA
 	{
 		OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
 
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionEffect, GetActorLocation());
+		UGameplayStatics::PlaySoundAtLocation(GetWorld(), HitSound, GetActorLocation());
+
 		Destroy();
 		OtherActor->Destroy();
 	}
