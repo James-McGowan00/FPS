@@ -6,6 +6,7 @@
 #include "Components/BoxComponent.h"
 #include "Assignment_1Character.h"
 #include "GameFramework/RotatingMovementComponent.h"
+#include "Engine/Engine.h"
 #include "Components/InterpToMovementComponent.h"
 
 // Sets default values
@@ -25,16 +26,20 @@ APickupSpawner::APickupSpawner()
 	_BoxCollision->SetupAttachment(RootComponent);
 
 	_SpawnLocation = CreateDefaultSubobject<USceneComponent>(TEXT("SpawnLocation"));
-	_SpawnLocation->SetRelativeLocation(FVector(0.0f, 0.0f, 0.0f));
+	_SpawnLocation->SetRelativeLocation(FVector(0.0f, 0.0f, 160.0f));
 	_SpawnLocation->SetupAttachment(RootComponent);
+
 
 	_RotatingMove = CreateDefaultSubobject<URotatingMovementComponent>(TEXT("RotatingMovement"));
 	_RotatingMove->RotationRate.Yaw = 45.0f;
 
 	_InterpMove = CreateDefaultSubobject<UInterpToMovementComponent>(TEXT("InterpMovement"));
 	_InterpMove->BehaviourType = EInterpToBehaviourType::PingPong;
-	_InterpMove->AddControlPointPosition(FVector::ZeroVector, true);
-	_InterpMove->AddControlPointPosition(FVector(0.0f, 0.0f, 15.0f), true);
+
+
+	_InterpMove->SetUpdatedComponent(_SpawnLocation);
+	_RotatingMove->SetUpdatedComponent(_SpawnLocation);
+
 
 	_SpawnDelay = 5.0f;
 
@@ -45,8 +50,6 @@ void APickupSpawner::BeginPlay()
 {
 	Super::BeginPlay();
 
-	_InterpMove->SetUpdatedComponent(_SpawnLocation);
-	_RotatingMove->SetUpdatedComponent(_SpawnLocation);
 
 	for (auto elem : _Pickups)
 	{
@@ -54,6 +57,8 @@ void APickupSpawner::BeginPlay()
 	}
 
 	SpawnPickup();
+
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(_SpawnLocation->GetComponentLocation()));
 	
 }
 
