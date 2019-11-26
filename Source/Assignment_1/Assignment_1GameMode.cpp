@@ -13,5 +13,6 @@ AAssignment_1GameMode::AAssignment_1GameMode()
 	DefaultPawnClass = PlayerPawnClassFinder.Class;
 
 	// use our custom HUD class
-	HUDClass = AAssignment_1HUD::StaticClass();
+	static ConstructorHelpers::FClassFinder<AHUD> HUDFinder(TEXT("/Game/MyHUD"));
+	HUDClass = HUDFinder.Class;
 }

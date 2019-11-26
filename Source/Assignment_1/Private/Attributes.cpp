@@ -2,7 +2,6 @@
 
 
 #include "Attributes.h"
-
 // Sets default values for this component's properties
 UAttributes::UAttributes()
 {
@@ -48,10 +47,13 @@ void UAttributes::TakeDamage(AActor* DamagedActor, float Damage, const UDamageTy
 	}
 
 	_CurrentHealth = FMath::Clamp(_CurrentHealth - Damage, 0.0f, _MaxHealth);
+
+	
 	
 }
 
 void UAttributes::RecoverHealth()
 {
 	_CurrentHealth += 25;
+
 }

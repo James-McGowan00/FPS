@@ -11,6 +11,7 @@
 #include "Engine/Engine.h"
 #include "Fireable.h"
 #include "WeaponBase.h"
+#include "Player_HUDD.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogFPChar, Warning, All);
 
@@ -43,6 +44,7 @@ void AAssignment_1Character::BeginPlay()
 	Super::BeginPlay();
 
 	//Attach gun mesh component to Skeleton, doing it here because the skeleton is not yet created in the constructor
+
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -91,7 +93,6 @@ void AAssignment_1Character::OnFire()
 	}
 
 }
-
 
 
 void AAssignment_1Character::MoveForward(float Value)
