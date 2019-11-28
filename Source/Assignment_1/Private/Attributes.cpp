@@ -17,7 +17,7 @@ UAttributes::UAttributes()
 	// ...
 	_MaxHealth = 100;
 	_CurrentHealth = _MaxHealth;
-	_MaxStamina = 600;
+	_MaxStamina = 100;
 	_CurrentStamina = _MaxStamina;
 
 }
@@ -61,7 +61,7 @@ void UAttributes::TakeDamage(AActor* DamagedActor, float Damage, const UDamageTy
 
 void UAttributes::RecoverHealth()
 {
-	if (_CurrentHealth != 100)
+	if (_CurrentHealth < 100)
 	{
 		_CurrentHealth = _CurrentHealth + 15;
 
@@ -72,5 +72,9 @@ void UAttributes::RecoverHealth()
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Health Full")));
 	}
 	
+	if (_CurrentHealth > _MaxHealth)
+	{
+		_CurrentHealth = _MaxHealth;
+	}
 
 }

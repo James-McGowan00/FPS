@@ -18,7 +18,6 @@ AWeaponBase::AWeaponBase()
 
 	GunMuzzle = CreateDefaultSubobject<UArrowComponent>(TEXT("GunMuzzle"));
 	GunMuzzle->SetupAttachment(GunMesh);
-
 }
 
 // Called when the game starts or when spawned

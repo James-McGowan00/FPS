@@ -12,6 +12,12 @@ void UMyPlayerStatUIWidget::NativeConstruct()
 	{
 		HealthBar->SetPercent(1); 
 	}
+
+	if (StaminaBar)
+	{
+		StaminaBar->SetPercent(1);
+	}
+
 }
 
 void UMyPlayerStatUIWidget::UpdateHealthBar(float value)
@@ -19,3 +25,12 @@ void UMyPlayerStatUIWidget::UpdateHealthBar(float value)
 	HealthBar->SetPercent(value);
 }
 
+void UMyPlayerStatUIWidget::UpdateStaminaBar(float value)
+{
+	StaminaBar->SetPercent(value);
+}
+
+void UMyPlayerStatUIWidget::UpdateAmmo(int value)
+{
+	Ammo;
+}

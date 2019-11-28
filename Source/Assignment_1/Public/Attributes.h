@@ -41,7 +41,6 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Stats")
 		float _MaxHealth;
 
-
 	UPROPERTY(EditAnywhere, Category = "Stats")
 		int _MaxStamina;
 
