@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "Attributes.generated.h"
 
+class AAssignment_1HUD;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class ASSIGNMENT_1_API UAttributes : public UActorComponent
@@ -55,4 +56,8 @@ private:
 	float _StaminaRecoverDeplayTimer;
 
 	void RecoverStanima(float DeltaTime);
+
+protected:
+	UPROPERTY()
+		AAssignment_1HUD* _Hud;
 };
