@@ -22,11 +22,9 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
-
+	
 	int GetMaxHealth() { return _MaxHealth; }
 	int GetCurrentHealth() { return _CurrentHealth; }
-	int GetMaxStamina() { return _MaxStamina; }
-	int GetCurrentStamina() { return _CurrentStamina; }
 
 	UFUNCTION()
 	void TakeDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
@@ -34,27 +32,12 @@ public:
 	UFUNCTION(BlueprintCallable)
 		void RecoverHealth();
 
+
 	UPROPERTY(BlueprintReadOnly)
 		float _CurrentHealth;
-
 private:
 	UPROPERTY(EditAnywhere, Category = "Stats")
 		float _MaxHealth;
-
-	UPROPERTY(EditAnywhere, Category = "Stats")
-		int _MaxStamina;
-
-	UPROPERTY(VisibleInstanceOnly, Category = "Stats")
-		int _CurrentStamina;
-
-	UPROPERTY(EditAnywhere, Category = "Stats")
-		float _StaminaRecoverRate;
-
-	UPROPERTY(EditAnywhere, Category = "Stats")
-		float _StaminaRecoverDelay;
-	float _StaminaRecoverDeplayTimer;
-
-	void RecoverStanima(float DeltaTime);
 
 protected:
 	UPROPERTY()

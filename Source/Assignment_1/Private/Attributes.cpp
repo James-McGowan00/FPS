@@ -17,9 +17,6 @@ UAttributes::UAttributes()
 	// ...
 	_MaxHealth = 100;
 	_CurrentHealth = _MaxHealth;
-	_MaxStamina = 100;
-	_CurrentStamina = _MaxStamina;
-
 }
 
 
@@ -39,12 +36,6 @@ void UAttributes::BeginPlay()
 		Owner->OnTakeAnyDamage.AddDynamic(this, &UAttributes::TakeDamage);
 	}
 	
-}
-
-
-void UAttributes::RecoverStanima(float DeltaTime)
-{
-
 }
 
 void UAttributes::TakeDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)

@@ -19,4 +19,27 @@ public:
 	// Called every frame
 	virtual bool Fire_Implementation() override;
 
+	virtual void BeginPlay() override;
+
+public:
+
+	int GetMaxAmmo() { return _MaxAmmo; }
+	int GetCurrentAmmo() { return _CurrentAmmo; }
+
+	UFUNCTION(BlueprintCallable)
+		void RecoverAmmo();
+
+	UFUNCTION()
+		void Shoot();
+
+
+	UPROPERTY(BlueprintReadOnly)
+		float _CurrentAmmo;
+
+private:
+	UPROPERTY(EditAnywhere, Category = "Ammo")
+		float  _MaxAmmo;
+
+
+
 };

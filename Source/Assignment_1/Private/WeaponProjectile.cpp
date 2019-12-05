@@ -9,7 +9,10 @@
 // Sets default values
 bool AWeaponProjectile::Fire_Implementation()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Firing the hitscan weapon class!")));
+	_MaxAmmo = 100;
+	_CurrentAmmo = _MaxAmmo;
+
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Firing the WeaponProjectile!")));
 	UWorld* const World = GetWorld();
 
 	if (World != nullptr && _Projectile != nullptr)
@@ -24,4 +27,40 @@ bool AWeaponProjectile::Fire_Implementation()
 		World->SpawnActor<AAssignment_1Projectile>(_Projectile, SpawnLocation, SpawnRotation, ActorSpawnParams);
 	}
 	return true;
+
+}
+
+void AWeaponProjectile::BeginPlay()
+{
+	Super::BeginPlay();
+
+
+	//_Hud = Cast<AAssignment_1HUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
+}
+
+void AWeaponProjectile::Shoot()
+{
+	if (Fire)
+	{
+		_CurrentAmmo--;
+	}
+}
+
+void AWeaponProjectile::RecoverAmmo()
+{
+	if (_CurrentAmmo < 100)
+	{
+		_CurrentAmmo = _CurrentAmmo + 10;
+
+		//_Hud->GetActiveStatsWidget()->UpdateHealthBar(_CurrentHealth / _MaxHealth);
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Ammo Full")));
+	}
+
+	if (_CurrentAmmo > _MaxAmmo)
+	{
+		_CurrentAmmo = _MaxAmmo;
+	}
 }
