@@ -19,13 +19,10 @@ private:
 		UProgressBar* HealthBar;
 
 	UPROPERTY(meta = (BindWidget))
-		UProgressBar* StaminaBar;
-
-	UPROPERTY(meta = (BindWidget))
 		UTextBlock* Ammo;
+
 public:
 	virtual void NativeConstruct() override;
 	void UpdateHealthBar(float value);
-	void UpdateStaminaBar(float value);
 	void UpdateAmmo(int value);
 };

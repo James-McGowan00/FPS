@@ -3,6 +3,7 @@
 
 #include "MyPlayerStatUIWidget.h"
 #include "Components/ProgressBar.h"
+#include "Components/TextBlock.h"
 
 void UMyPlayerStatUIWidget::NativeConstruct()
 {
@@ -12,12 +13,6 @@ void UMyPlayerStatUIWidget::NativeConstruct()
 	{
 		HealthBar->SetPercent(1); 
 	}
-
-	if (StaminaBar)
-	{
-		StaminaBar->SetPercent(1);
-	}
-
 }
 
 void UMyPlayerStatUIWidget::UpdateHealthBar(float value)
@@ -25,12 +20,10 @@ void UMyPlayerStatUIWidget::UpdateHealthBar(float value)
 	HealthBar->SetPercent(value);
 }
 
-void UMyPlayerStatUIWidget::UpdateStaminaBar(float value)
-{
-	StaminaBar->SetPercent(value);
-}
 
 void UMyPlayerStatUIWidget::UpdateAmmo(int value)
 {
-	Ammo;
+	FString text = FString::FromInt(value);
+	FText bullet = FText::FromString(text);
+	Ammo->SetText(bullet);
 }

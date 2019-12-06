@@ -7,6 +7,8 @@
 #include "WeaponBase.h"
 #include "WeaponProjectile.generated.h"
 
+class AAssignment_1HUD;
+
 UCLASS()
 class ASSIGNMENT_1_API AWeaponProjectile : public AWeaponBase
 {
@@ -29,17 +31,13 @@ public:
 	UFUNCTION(BlueprintCallable)
 		void RecoverAmmo();
 
-	UFUNCTION()
-		void Shoot();
-
-
 	UPROPERTY(BlueprintReadOnly)
-		float _CurrentAmmo;
+		int _CurrentAmmo;
 
-private:
 	UPROPERTY(EditAnywhere, Category = "Ammo")
-		float  _MaxAmmo;
+		int  _MaxAmmo;
 
-
-
+protected:
+	UPROPERTY()
+		AAssignment_1HUD* _Hud;
 };
