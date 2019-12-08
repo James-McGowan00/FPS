@@ -12,7 +12,7 @@ void AWeaponProjectile::BeginPlay()
 {
 	Super::BeginPlay();
 
-	_MaxAmmo = 20;
+	_MaxAmmo = 25;
 	_CurrentAmmo = _MaxAmmo;
 
 	_Hud = Cast<AAssignment_1HUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
@@ -44,11 +44,13 @@ bool AWeaponProjectile::Fire_Implementation()
 	}
 	else
 	{
-		return false;
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Relaoding!")));
+		AddAmmo();
 	}
+	return false;
 }
 
-void AWeaponProjectile::RecoverAmmo()
+void AWeaponProjectile::AddAmmo()
 {	
 	_CurrentAmmo = _MaxAmmo;
 	_Hud->GetActiveStatsWidget()->UpdateAmmo(_CurrentAmmo);

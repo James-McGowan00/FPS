@@ -23,13 +23,11 @@ public:
 
 	virtual void BeginPlay() override;
 
-public:
-
 	int GetMaxAmmo() { return _MaxAmmo; }
 	int GetCurrentAmmo() { return _CurrentAmmo; }
 
 	UFUNCTION(BlueprintCallable)
-		void RecoverAmmo();
+		void AddAmmo();
 
 	UPROPERTY(BlueprintReadOnly)
 		int _CurrentAmmo;

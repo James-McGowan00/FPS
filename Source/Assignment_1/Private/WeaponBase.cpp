@@ -5,7 +5,6 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/ArrowComponent.h"
 #include "Engine/Engine.h"
-#include "Assignment_1Projectile.h"
 
 // Sets default values
 AWeaponBase::AWeaponBase()

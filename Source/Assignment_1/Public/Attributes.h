@@ -26,7 +26,7 @@ public:
 	int GetMaxHealth() { return _MaxHealth; }
 	int GetCurrentHealth() { return _CurrentHealth; }
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void TakeDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
 
 	UFUNCTION(BlueprintCallable)
