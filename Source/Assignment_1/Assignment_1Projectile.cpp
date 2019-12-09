@@ -28,7 +28,7 @@ AAssignment_1Projectile::AAssignment_1Projectile()
 	ProjectileMovement->bShouldBounce = true;
 
 	// Die after 3 seconds by default
-	InitialLifeSpan = 3.0f;
+	InitialLifeSpan = 0.5f;
 }
 
 void AAssignment_1Projectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
@@ -36,7 +36,7 @@ void AAssignment_1Projectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherA
 	// Only add impulse and destroy projectile if we hit a physics
 	if ((OtherActor != NULL) && (OtherActor != this) && (OtherComp != NULL) && OtherComp->IsSimulatingPhysics())
 	{
-		OtherComp->AddImpulseAtLocation(GetVelocity() * 1000.0f, GetActorLocation());
+		OtherComp->AddImpulseAtLocation(GetVelocity() * 2000.0f, GetActorLocation());
 
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionEffect, GetActorLocation());
 		UGameplayStatics::PlaySoundAtLocation(GetWorld(), HitSound, GetActorLocation());

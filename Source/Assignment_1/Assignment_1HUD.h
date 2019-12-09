@@ -26,7 +26,7 @@ private:
 	/** Crosshair asset pointer */
 	class UTexture2D* CrosshairTex;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Gun Widgets")
+	UPROPERTY(EditDefaultsOnly, Category = "Stat Widgets")
 	TAssetSubclassOf<UMyPlayerStatUIWidget> _StatWidget;
 
 	UMyPlayerStatUIWidget* _ActiveStatWidget;
