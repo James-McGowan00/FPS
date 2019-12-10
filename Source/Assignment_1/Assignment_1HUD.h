@@ -6,6 +6,8 @@
 #include "GameFramework/HUD.h"
 #include "Assignment_1HUD.generated.h"
 
+class UMyPlayerStatUIWidget;
+
 UCLASS()
 class AAssignment_1HUD : public AHUD
 {
@@ -17,9 +19,17 @@ public:
 	/** Primary draw call for the HUD */
 	virtual void DrawHUD() override;
 
+	void DrawStats();
+	FORCEINLINE UMyPlayerStatUIWidget* GetActiveStatsWidget() const { return _ActiveStatWidget; }
+
 private:
 	/** Crosshair asset pointer */
 	class UTexture2D* CrosshairTex;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Stat Widgets")
+	TAssetSubclassOf<UMyPlayerStatUIWidget> _StatWidget;
+
+	UMyPlayerStatUIWidget* _ActiveStatWidget;
 
 };
 

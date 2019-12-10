@@ -36,8 +36,4 @@ private:
 	APlayerController* Controller;
 	APawn* Player;
 	TArray<AActor> PlayerStartArray;
-
-
-
-	
 };

@@ -5,6 +5,7 @@
 #include "Engine/Texture2D.h"
 #include "TextureResource.h"
 #include "CanvasItem.h"
+#include "MyPlayerStatUIWidget.h"
 #include "UObject/ConstructorHelpers.h"
 
 AAssignment_1HUD::AAssignment_1HUD()
@@ -32,4 +33,14 @@ void AAssignment_1HUD::DrawHUD()
 	FCanvasTileItem TileItem( CrosshairDrawPosition, CrosshairTex->Resource, FLinearColor::White);
 	TileItem.BlendMode = SE_BLEND_Translucent;
 	Canvas->DrawItem( TileItem );
+}
+
+void AAssignment_1HUD::DrawStats()
+{
+	_ActiveStatWidget = CreateWidget<UMyPlayerStatUIWidget>(GetOwningPlayerController(), _StatWidget.LoadSynchronous());
+
+	if (_ActiveStatWidget != nullptr)
+	{
+		_ActiveStatWidget->AddToViewport(0);
+	}
 }

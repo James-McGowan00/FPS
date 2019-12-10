@@ -7,6 +7,7 @@
 #include "MyPlayerStatUIWidget.generated.h"
 
 class UProgressBar;
+class UTextBlock;
 
 UCLASS(Abstract)
 class ASSIGNMENT_1_API UMyPlayerStatUIWidget : public UBaseWidget
@@ -17,9 +18,11 @@ private:
 	UPROPERTY(meta = (BindWidget))
 		UProgressBar* HealthBar;
 
-public:
+	UPROPERTY(meta = (BindWidget))
+		UTextBlock* Ammo;
 
+public:
 	virtual void NativeConstruct() override;
 	void UpdateHealthBar(float value);
-	
+	void UpdateAmmo(int value);
 };

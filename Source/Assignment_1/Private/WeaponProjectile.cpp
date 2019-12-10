@@ -5,23 +5,53 @@
 #include "Engine/Engine.h"
 #include "Engine/World.h"
 #include "Components/ArrowComponent.h"
+#include "MyPlayerStatUIWidget.h"
+#include "Assignment_1HUD.h"
+
+void AWeaponProjectile::BeginPlay()
+{
+	Super::BeginPlay();
+
+	_MaxAmmo = 15;
+	_CurrentAmmo = _MaxAmmo;
+
+	_Hud = Cast<AAssignment_1HUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
+}
 
 // Sets default values
 bool AWeaponProjectile::Fire_Implementation()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Firing the hitscan weapon class!")));
-	UWorld* const World = GetWorld();
-
-	if (World != nullptr && _Projectile != nullptr)
+	if (_CurrentAmmo > 0)
 	{
-		UArrowComponent* Muzzle = GetGunMuzzle();
-		FVector SpawnLocation = ((Muzzle != nullptr) ? Muzzle->GetComponentLocation() : GetActorLocation());
-		FRotator SpawnRotation = ((Muzzle != nullptr) ? Muzzle->GetComponentRotation() : GetActorRotation());
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Firing the WeaponProjectile!")));
+		UWorld* const World = GetWorld();
 
-		FActorSpawnParameters ActorSpawnParams;
-		ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
+		if (World != nullptr && _Projectile != nullptr)
+		{
+			UArrowComponent* Muzzle = GetGunMuzzle();
+			FVector SpawnLocation = ((Muzzle != nullptr) ? Muzzle->GetComponentLocation() : GetActorLocation());
+			FRotator SpawnRotation = ((Muzzle != nullptr) ? Muzzle->GetComponentRotation() : GetActorRotation());
 
-		World->SpawnActor<AAssignment_1Projectile>(_Projectile, SpawnLocation, SpawnRotation, ActorSpawnParams);
+			FActorSpawnParameters ActorSpawnParams;
+			ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
+
+			World->SpawnActor<AAssignment_1Projectile>(_Projectile, SpawnLocation, SpawnRotation, ActorSpawnParams);
+
+			_CurrentAmmo -= 1;
+			_Hud->GetActiveStatsWidget()->UpdateAmmo(_CurrentAmmo);
+		}
+		return true;
 	}
-	return true;
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Relaoding!")));
+		AddAmmo();
+	}
+	return false;
+}
+
+void AWeaponProjectile::AddAmmo()
+{	
+	_CurrentAmmo = _MaxAmmo;
+	_Hud->GetActiveStatsWidget()->UpdateAmmo(_CurrentAmmo);
 }

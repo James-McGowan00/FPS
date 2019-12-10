@@ -2,6 +2,11 @@
 
 
 #include "Attributes.h"
+#include "Kismet/GameplayStatics.h"
+#include "MyPlayerStatUIWidget.h"
+#include "Assignment_1HUD.h"
+#include "Engine/Engine.h"
+
 // Sets default values for this component's properties
 UAttributes::UAttributes()
 {
@@ -12,9 +17,6 @@ UAttributes::UAttributes()
 	// ...
 	_MaxHealth = 100;
 	_CurrentHealth = _MaxHealth;
-	_MaxStamina = 600;
-	_CurrentStamina = _MaxStamina;
-
 }
 
 
@@ -22,6 +24,9 @@ UAttributes::UAttributes()
 void UAttributes::BeginPlay()
 {
 	Super::BeginPlay();
+
+
+	_Hud = Cast<AAssignment_1HUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
 
 	// ...
 
@@ -33,12 +38,6 @@ void UAttributes::BeginPlay()
 	
 }
 
-
-void UAttributes::RecoverStanima(float DeltaTime)
-{
-
-}
-
 void UAttributes::TakeDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
 	if (Damage <= 0)
@@ -48,12 +47,25 @@ void UAttributes::TakeDamage(AActor* DamagedActor, float Damage, const UDamageTy
 
 	_CurrentHealth = FMath::Clamp(_CurrentHealth - Damage, 0.0f, _MaxHealth);
 
-	
-	
+	_Hud->GetActiveStatsWidget()->UpdateHealthBar(_CurrentHealth / _MaxHealth);
 }
 
 void UAttributes::RecoverHealth()
 {
-	_CurrentHealth += 25;
+	if (_CurrentHealth < 100)
+	{
+		_CurrentHealth = _CurrentHealth + 15;
+
+		_Hud->GetActiveStatsWidget()->UpdateHealthBar(_CurrentHealth / _MaxHealth);
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Health Full")));
+	}
+	
+	if (_CurrentHealth > _MaxHealth)
+	{
+		_CurrentHealth = _MaxHealth;
+	}
 
 }

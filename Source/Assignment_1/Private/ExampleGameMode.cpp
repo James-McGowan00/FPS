@@ -4,6 +4,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/Actor.h"
 #include "Assignment_1Character.h"
+#include "Assignment_1HUD.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Engine/World.h"
 
@@ -13,12 +14,14 @@ AExampleGameMode::AExampleGameMode()
 	CurrentLevelIndex = 0;
 	static ConstructorHelpers::FClassFinder<APawn> CharacterFinder(TEXT("/Game/FirstPersonCPP/Blueprints/FirstPersonCharacter"));
 	DefaultPawnClass = CharacterFinder.Class;
+
+	static ConstructorHelpers::FClassFinder<AAssignment_1HUD> HUDFinder(TEXT("/Game/MyHud"));
+	HUDClass = HUDFinder.Class;
 }
 
 void AExampleGameMode::BeginPlay()
 {
 	Super::BeginPlay();
-
 
 	Controller = UGameplayStatics::GetPlayerController(this, 0);
 	FInputModeGameOnly InputMode;

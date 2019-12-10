@@ -5,7 +5,6 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/ArrowComponent.h"
 #include "Engine/Engine.h"
-#include "Assignment_1Projectile.h"
 
 // Sets default values
 AWeaponBase::AWeaponBase()
@@ -18,7 +17,6 @@ AWeaponBase::AWeaponBase()
 
 	GunMuzzle = CreateDefaultSubobject<UArrowComponent>(TEXT("GunMuzzle"));
 	GunMuzzle->SetupAttachment(GunMesh);
-
 }
 
 // Called when the game starts or when spawned

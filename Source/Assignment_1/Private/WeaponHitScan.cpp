@@ -9,7 +9,6 @@
 // Sets default values
 bool AWeaponHitScan::Fire_Implementation()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Firing the hitscan weapon class!")));
 	UWorld* const World = GetWorld();
 
 	if (World != nullptr)
@@ -26,7 +25,7 @@ bool AWeaponHitScan::Fire_Implementation()
 
 		if (World->LineTraceSingleByChannel(hit, start, end, ECC_Visibility, CollisionParams))
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, hit.GetActor()->GetActorLabel());
+			
 		}
 
 	}
