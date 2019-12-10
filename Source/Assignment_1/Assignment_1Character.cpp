@@ -83,7 +83,7 @@ void AAssignment_1Character::OnFire()
 	IFireable* weaponCast = Cast<IFireable>(child);
 	if (weaponCast)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Cast Success")));
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Cast Success")));
 		weaponCast->Execute_Fire(child);
 	}
 

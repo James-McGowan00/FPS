@@ -12,7 +12,7 @@ void AWeaponProjectile::BeginPlay()
 {
 	Super::BeginPlay();
 
-	_MaxAmmo = 25;
+	_MaxAmmo = 15;
 	_CurrentAmmo = _MaxAmmo;
 
 	_Hud = Cast<AAssignment_1HUD>(UGameplayStatics::GetPlayerController(this, 0)->GetHUD());
@@ -23,7 +23,7 @@ bool AWeaponProjectile::Fire_Implementation()
 {
 	if (_CurrentAmmo > 0)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Firing the WeaponProjectile!")));
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Firing the WeaponProjectile!")));
 		UWorld* const World = GetWorld();
 
 		if (World != nullptr && _Projectile != nullptr)
